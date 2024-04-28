@@ -314,113 +314,21 @@
 
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table" id="table-desa-baru">
           <thead>
-            <tr>
-              <th style="width: 5%">No.</th>
-              <th style="width: 15%">Tanggal Terpantau</th>
-              <th style="width: 15%">Desa</th>
-              <th style="width: 15%">Kecamatan</th>
-              <th style="width: 15%">Kabupaten</th>
-              <th style="width: 15%">Provinsi</th>
-              <th style="width: 10%">Versi</th>
-            </tr>
+              <tr>
+                  <th>No</th>
+                  <th>Tgl Terpantau</th>
+                  <th>Desa</th>
+                  <th>Kecamatan</th>
+                  <th>Kabupaten</th>
+                  <th>Provinsi</th>
+                  <th>Web</th>
+                  <th>Versi</th>
+              </tr>
           </thead>
-          <tbody>
-            <!-- Isi tabel -->
-            <tr>
-              <td>1</td>
-              <td>01-03-2024</td>
-              <td>Desa A</td>
-              <td>Kecamatan A</td>
-              <td>Kabupaten A</td>
-              <td>Provinsi A</td>
-              <td>Versi A</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>02-03-2024</td>
-              <td>Desa B</td>
-              <td>Kecamatan B</td>
-              <td>Kabupaten B</td>
-              <td>Provinsi B</td>
-              <td>Versi B</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>03-03-2024</td>
-              <td>Desa C</td>
-              <td>Kecamatan C</td>
-              <td>Kabupaten C</td>
-              <td>Provinsi C</td>
-              <td>Versi C</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>01-03-2024</td>
-              <td>Desa A</td>
-              <td>Kecamatan A</td>
-              <td>Kabupaten A</td>
-              <td>Provinsi A</td>
-              <td>Versi A</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>02-03-2024</td>
-              <td>Desa B</td>
-              <td>Kecamatan B</td>
-              <td>Kabupaten B</td>
-              <td>Provinsi B</td>
-              <td>Versi B</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>03-03-2024</td>
-              <td>Desa C</td>
-              <td>Kecamatan C</td>
-              <td>Kabupaten C</td>
-              <td>Provinsi C</td>
-              <td>Versi C</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>01-03-2024</td>
-              <td>Desa A</td>
-              <td>Kecamatan A</td>
-              <td>Kabupaten A</td>
-              <td>Provinsi A</td>
-              <td>Versi A</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>02-03-2024</td>
-              <td>Desa B</td>
-              <td>Kecamatan B</td>
-              <td>Kabupaten B</td>
-              <td>Provinsi B</td>
-              <td>Versi B</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>03-03-2024</td>
-              <td>Desa C</td>
-              <td>Kecamatan C</td>
-              <td>Kabupaten C</td>
-              <td>Provinsi C</td>
-              <td>Versi C</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>01-03-2024</td>
-              <td>Desa A</td>
-              <td>Kecamatan A</td>
-              <td>Kabupaten A</td>
-              <td>Provinsi A</td>
-              <td>Versi A</td>
-            </tr>
-           
-          </tbody>
-        </table>
+          <tbody></tbody>
+      </table>
       </div>
     </div>
     <div class="card-footer text-center">
@@ -606,4 +514,89 @@
 
 @section('js')
 <script src="{{ url('assets/js/page/index-0.js') }}"></script>
+<script>
+  var desaBaru = $('#table-desa-baru').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: false,
+      ordering: true,
+      ajax: {
+          url: `{{ route('datatables:desa-baru') }}`,
+          method: 'get',
+      },
+      columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex',
+              searchable: false,
+              orderable: false
+          },
+          {
+              data: 'format_created_at', name: 'created_at'
+          },
+          {
+              data: 'nama_desa'
+          },
+          {
+              data: 'nama_kecamatan'
+          },
+          {
+              data: 'nama_kabupaten'
+          },
+          {
+              data: 'nama_provinsi'
+          },
+          {
+              data: function (data) {
+                  if (data.url_hosting) {
+                      return `<a target="_blank" href="https://${data.url_hosting}">https://${data.url_hosting}</a>`
+                  } else if (data.url_lokal) {
+                      return `<a target="_blank" href="http://${data.url_lokal}">http://${data.url_lokal}</a>`
+                  }
+
+                  return '';
+              },
+              searchable: false,
+              orderable: false,
+              visible : {{ auth()->check() == false ?'false' : 'true' }}
+          },
+          {
+              data: 'versi',
+              searchable: false
+          },
+      ],
+      order: [
+          [1, 'desc']
+      ],
+  })
+
+  var kabupatenKosong = $('#table-kabupaten-kosong').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: false,
+      ordering: true,
+      ajax: {
+          url: `{{ route('datatables:kabupaten-kosong') }}`,
+          method: 'get',
+      },
+      columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex',
+              searchable: false,
+              orderable: false
+          },
+          {
+              data: 'region_code'
+          },
+          {
+              data: 'nama_kabupaten'
+          },
+          {
+              data: 'nama_provinsi'
+          },
+          {
+              data: 'jml_desa'
+          },
+      ]
+  })
+</script>
 @stop
