@@ -331,7 +331,7 @@
       </table>
       </div>
     </div>
-    <div class="card-footer text-center">
+    {{-- <div class="card-footer text-center">
       <button class="btn btn-primary">Prev</button>
       <!-- Logic for number buttons -->
       <div class="btn-group" role="group" aria-label="Number Buttons">
@@ -343,7 +343,7 @@
       </div>
       <!-- End of number buttons -->
       <button class="btn btn-primary">Next</button>
-  </div>                
+    </div>                 --}}
   </div>
 </div>
 
@@ -361,7 +361,7 @@
       <h4 style="margin-bottom: 0px; color: #ffffff;">Desa/Kelurahan Aktif</h4>
     </div>
     <div class="card-body">
-        <h1 style="text-align: center; font-size: 60px;">{{ $desaBaru}}</h1>
+        <h1 style="text-align: center; font-size: 60px;">{{ $jumlahDesa->aktif}}</h1>
         <p style="text-align: center; font-size: 18px;">Total Desa: {{ $jumlahKelurahan}}</p>
     </div>
   </div>
@@ -515,88 +515,91 @@
 @section('js')
 <script src="{{ url('assets/js/page/index-0.js') }}"></script>
 <script>
-  var desaBaru = $('#table-desa-baru').DataTable({
+  $(document).ready(function() {
+    var desaBaru = $('#table-desa-baru').DataTable({
       processing: true,
       serverSide: true,
       autoWidth: false,
       ordering: true,
       ajax: {
-          url: `{{ route('datatables:desa-baru') }}`,
-          method: 'get',
+        url: "{{ route('datatables:desa-baru') }}",
+        method: 'get',
       },
       columns: [{
-              data: 'DT_RowIndex',
-              name: 'DT_RowIndex',
-              searchable: false,
-              orderable: false
-          },
-          {
-              data: 'format_created_at', name: 'created_at'
-          },
-          {
-              data: 'nama_desa'
-          },
-          {
-              data: 'nama_kecamatan'
-          },
-          {
-              data: 'nama_kabupaten'
-          },
-          {
-              data: 'nama_provinsi'
-          },
-          {
-              data: function (data) {
-                  if (data.url_hosting) {
-                      return `<a target="_blank" href="https://${data.url_hosting}">https://${data.url_hosting}</a>`
-                  } else if (data.url_lokal) {
-                      return `<a target="_blank" href="http://${data.url_lokal}">http://${data.url_lokal}</a>`
-                  }
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex',
+          searchable: false,
+          orderable: false
+        },
+        {
+          data: 'format_created_at',
+          name: 'created_at'
+        },
+        {
+          data: 'nama_desa'
+        },
+        {
+          data: 'nama_kecamatan'
+        },
+        {
+          data: 'nama_kabupaten'
+        },
+        {
+          data: 'nama_provinsi'
+        },
+        {
+          data: function(data) {
+            if (data.url_hosting) {
+              return `<a target="_blank" href="https://${data.url_hosting}">https://${data.url_hosting}</a>`;
+            } else if (data.url_lokal) {
+              return `<a target="_blank" href="http://${data.url_lokal}">http://${data.url_lokal}</a>`;
+            }
 
-                  return '';
-              },
-              searchable: false,
-              orderable: false,
-              visible : {{ auth()->check() == false ?'false' : 'true' }}
+            return '';
           },
-          {
-              data: 'versi',
-              searchable: false
-          },
+          searchable: false,
+          orderable: false,
+          visible: {{ auth()->check() == false ? 'false' : 'true' }}
+        },
+        {
+          data: 'versi',
+          searchable: false
+        },
       ],
       order: [
-          [1, 'desc']
-      ],
-  })
+        [1, 'desc']
+      ]
+    });
 
-  var kabupatenKosong = $('#table-kabupaten-kosong').DataTable({
+    var kabupatenKosong = $('#table-kabupaten-kosong').DataTable({
       processing: true,
       serverSide: true,
       autoWidth: false,
       ordering: true,
       ajax: {
-          url: `{{ route('datatables:kabupaten-kosong') }}`,
-          method: 'get',
+        url: "{{ route('datatables:kabupaten-kosong') }}",
+        method: 'get',
       },
       columns: [{
-              data: 'DT_RowIndex',
-              name: 'DT_RowIndex',
-              searchable: false,
-              orderable: false
-          },
-          {
-              data: 'region_code'
-          },
-          {
-              data: 'nama_kabupaten'
-          },
-          {
-              data: 'nama_provinsi'
-          },
-          {
-              data: 'jml_desa'
-          },
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex',
+          searchable: false,
+          orderable: false
+        },
+        {
+          data: 'region_code'
+        },
+        {
+          data: 'nama_kabupaten'
+        },
+        {
+          data: 'nama_provinsi'
+        },
+        {
+          data: 'jml_desa'
+        },
       ]
-  })
+    });
+  });
 </script>
 @stop

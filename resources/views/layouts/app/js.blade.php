@@ -22,6 +22,9 @@
 <script src="{{ url('assets/js/scripts.js') }}"></script>
 <script src="{{ url('assets/js/custom.js') }}"></script>
 <script src="{{url('vendor/select2/js/select2.full.min.js')}}"></script>
+<script src="{{url('vendor/datatables/js/jquery.dataTables.js')}}"> </script> 
+<script src="{{url('vendor/datatables/js/dataTables.bootstrap4.js')}}"></script>  
+
 
 @yield('js')
 @stack('js')

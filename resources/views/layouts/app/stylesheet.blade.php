@@ -24,3 +24,4 @@ href="{{ url('assets/modules/summernote/summernote-bs4.css') }}"
 <link rel="stylesheet" href="{{url('assets/css/style.css')}}" />
 <link rel="stylesheet" href="{{url('assets/css/components.css')}}" />
 <link rel="stylesheet" href="{{url('vendor/select2/css/select2.min.css')}}"/>
+<link rel="stylesheet" href="{{url('vendor/datatables/css/dataTables.bootstrap4.css')}}">
