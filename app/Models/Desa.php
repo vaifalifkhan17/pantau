@@ -56,21 +56,24 @@ class Desa extends Model
 
     public function scopeJumlahProvinsi($query)
     {
-        return $query->selectRaw(' COUNT(*) as total')
-            ->groupBy('kode_provinsi');
+        return $query->selectRaw('COUNT(DISTINCT kode_provinsi) as total');
     }
 
     public function scopeJumlahKabupaten($query)
     {
-        return  $query->selectRaw('COUNT(*) as total')
-            ->groupBy('kode_kabupaten');
+        return $query->selectRaw('COUNT(DISTINCT kode_kabupaten) as total');
     }
 
     public function scopeJumlahKecamatan($query)
     {
-        return  $query->selectRaw('COUNT(*) as total')
-            ->groupBy('kode_kecamatan');
+        return $query->selectRaw('COUNT(DISTINCT kode_kecamatan) as total');
     }
+
+    public function scopeJumlahKelurahan($query)
+    {
+        return $query->selectRaw('COUNT(DISTINCT kode_desa) as total');
+    }
+
 
     public function scopeJumlahDesa($query)
     {

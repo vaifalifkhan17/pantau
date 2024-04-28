@@ -182,7 +182,7 @@
       <div class="card-header">
         <h4>Kelurahan/Desa</h4>
       </div>
-      <div class="card-body">95621</div>
+      <div class="card-body">{{ $jumlahKelurahan}}</div>
     </div>
   </div>
 </div>
@@ -202,13 +202,13 @@
                   <div style="display: flex; flex-direction: column; align-items: center;">
                       <span style="font-size: 16px; font-weight: bold;">Online</span>
                       <div style="width: 50px; height: 50px; background-color: #28a745; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-                          <span style="font-size: 18px; color: #fff;">109</span>
+                          <span style="font-size: 18px; color: #fff;">{{ $jumlahOpendkOn}}</span>
                       </div>
                   </div>
                   <div style="display: flex; flex-direction: column; align-items: center;">
                       <span style="font-size: 16px; font-weight: bold;">Offline</span>
                       <div style="width: 50px; height: 50px; background-color: #dc3545; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-                          <span style="font-size: 18px; color: #fff;">19</span>
+                          <span style="font-size: 18px; color: #fff;">{{ $jumlahOpendkOff}}</span>
                       </div>
                   </div>
               </div>
@@ -229,13 +229,13 @@
                   <div style="display: flex; flex-direction: column; align-items: center;">
                       <span style="font-size: 16px; font-weight: bold;">Online</span>
                       <div style="width: 50px; height: 50px; background-color: #28a745; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-                          <span style="font-size: 18px; color: #fff;">109</span>
+                          <span style="font-size: 18px; color: #fff;">{{ $jumlahMobileOn}}</span>
                       </div>
                   </div>
                   <div style="display: flex; flex-direction: column; align-items: center;">
                       <span style="font-size: 16px; font-weight: bold;">Offline</span>
                       <div style="width: 50px; height: 50px; background-color: #dc3545; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-                          <span style="font-size: 18px; color: #fff;">19</span>
+                          <span style="font-size: 18px; color: #fff;">{{ $jumlahMobileOff}}</span>
                       </div>
                   </div>
               </div>
@@ -283,13 +283,13 @@
                   <div style="display: flex; flex-direction: column; align-items: center;">
                       <span style="font-size: 16px; font-weight: bold;">Online</span>
                       <div style="width: 50px; height: 50px; background-color: #28a745; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-                          <span style="font-size: 18px; color: #fff;">59</span>
+                          <span style="font-size: 18px; color: #fff;">{{ $jumlahDesa->desa_online}} </span>
                       </div>
                   </div>
                   <div style="display: flex; flex-direction: column; align-items: center;">
                       <span style="font-size: 16px; font-weight: bold;">Offline</span>
                       <div style="width: 50px; height: 50px; background-color: #dc3545; border-radius: 5px; display: flex; justify-content: center; align-items: center;">
-                          <span style="font-size: 18px; color: #fff;">14</span>
+                          <span style="font-size: 18px; color: #fff;">{{ $jumlahDesa->desa_offline}}</span>
                       </div>
                   </div>
               </div>
@@ -453,8 +453,8 @@
       <h4 style="margin-bottom: 0px; color: #ffffff;">Desa/Kelurahan Aktif</h4>
     </div>
     <div class="card-body">
-        <h1 style="text-align: center; font-size: 60px;">7517</h1>
-        <p style="text-align: center; font-size: 18px;">Total Desa: 21.413</p>
+        <h1 style="text-align: center; font-size: 60px;">{{ $desaBaru}}</h1>
+        <p style="text-align: center; font-size: 18px;">Total Desa: {{ $jumlahKelurahan}}</p>
     </div>
   </div>
 
